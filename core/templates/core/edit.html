@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit-Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'core/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+
+<body>
+    <form action="{% url 'edit-task' task.pk %}" class="input-group" method="post">
+        {% csrf_token %}
+        <input type="text" value="{{ task }}" class="input__item new-task" name="updated_task" placeholder="{{ task }}">
+        <button type="submit" class="input__item btn add-btn"><i class="fa fa-plus"></i>Update</button>
+    </form>
+</body>
+
+</html>

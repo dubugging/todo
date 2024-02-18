@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'core/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+
+<body>
+    <h1>Goals for {% now "jS F Y" %}</h1>
+    <div class="incomplete-task">
+        {% for task in tasks %}
+        <div class="card">
+            {{ forloop.counter }}: {{ task }}
+            <span class="btn-group">
+                <a href="{% url 'delete-task' task.pk %}" class="btn btn-done"><i class="fa fa-check"></i></a>
+                <a href="{% url 'edit-task' task.pk %}" class="btn btn-edit"><i class="fa fa-pencil"></i></a>
+            </span>
+        </div>
+        {% endfor %}
+    </div>
+    <form action="{% url 'add-task' %}" class="input-group" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Add a Task" class="input__item new-task" name="new_task">
+        <button type="submit" class="input__item btn add-btn"><i class="fa fa-plus"></i>Add</button>
+    </form>
+
+</body>
+
+</html>
